@@ -22,6 +22,12 @@ function Dashboard({ token, onLogout }) {
   const [allFunding, setAllFunding] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [profileDomains, setProfileDomains] = useState("");
+  const [innovationStats, setInnovationStats] = useState({
+  researchDomains: 0,
+  fundingMatches: 0,
+  patentInsights: 0,
+  innovationAreas: 0,
+});
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -85,6 +91,20 @@ function Dashboard({ token, onLogout }) {
     fetchProfileDomains();
   }, [token, funding]);
 
+  useEffect(() => {
+  const domains = profileDomains
+    .split(",")
+    .map((d) => d.trim())
+    .filter(Boolean);
+
+  setInnovationStats({
+    researchDomains: domains.length,
+    fundingMatches: funding.length,
+    patentInsights: 0,
+    innovationAreas: domains.length ,
+  });
+}, [profileDomains, funding]);
+
   const getMatchInfo = (fundingItem) => {
     if (!profileDomains || !fundingItem.domains) return null;
     const userKw = profileDomains
@@ -128,16 +148,17 @@ function Dashboard({ token, onLogout }) {
     return role.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
   };
 
-  const tabs = [
-    { id: "overview", label: "Overview" },
-    { id: "research", label: "Research" },
-    { id: "patents", label: "Patents" },
-    { id: "innovation", label: "Innovation" },
-    { id: "funding", label: "Funding" },
-  ];
+ const tabs = [
+  { id: "overview", label: "Overview" },
+  { id: "research", label: "Research" },
+  { id: "patents", label: "Patents" },
+  { id: "innovation", label: "Innovation" },
+  { id: "funding", label: "Funding" },
+];
 
-  return (
-    <div className="dash-page">
+return (
+  <div className="dash-page">
+    <div className="dash-navbar"></div>
       <div className="dash-navbar">
         <div className="dash-brand">
           Research Funding &amp; <span className="highlight">Innovation Intelligence</span>
@@ -183,6 +204,67 @@ function Dashboard({ token, onLogout }) {
                   <p><strong>Role:</strong> {formatRole(profile.role)}</p>
                 </div>
               )}
+              <div className="overview-stats">
+  <div className="overview-stat-card">
+    <h4>Research Domains</h4>
+    <strong>{innovationStats.researchDomains}</strong>
+    <p>Areas in your research profile</p>
+  </div>
+  <div className="dash-card">
+  <h3>Platform Intelligence Summary</h3>
+  <p className="dash-card-subtitle">
+    Current status of your research and innovation profile
+  </p>
+
+  <div className="intelligence-summary">
+    <div className="intelligence-item">
+      <span>Research Profile</span>
+      <strong>
+        {innovationStats.researchDomains > 0 ? "Complete" : "Incomplete"}
+      </strong>
+    </div>
+
+    <div className="intelligence-item">
+      <span>Funding Intelligence</span>
+      <strong>
+        {innovationStats.fundingMatches > 0 ? "Available" : "No Matches"}
+      </strong>
+    </div>
+
+    <div className="intelligence-item">
+      <span>Patent Data</span>
+      <strong>
+        {innovationStats.patentInsights > 0 ? "Available" : "No Data"}
+      </strong>
+    </div>
+
+    <div className="intelligence-item">
+      <span>Innovation Analysis</span>
+      <strong>
+        {innovationStats.innovationAreas > 0 ? "Available" : "Pending"}
+      </strong>
+    </div>
+  </div>
+</div>
+
+  <div className="overview-stat-card">
+    <h4>Funding Matches</h4>
+    <strong>{innovationStats.fundingMatches}</strong>
+    <p>Matching funding opportunities</p>
+  </div>
+
+  <div className="overview-stat-card">
+    <h4>Patent Insights</h4>
+    <strong>{innovationStats.patentInsights}</strong>
+    <p>Patent intelligence areas</p>
+  </div>
+
+  <div className="overview-stat-card">
+    <h4>Innovation Areas</h4>
+    <strong>{innovationStats.innovationAreas}</strong>
+    <p>Potential innovation areas</p>
+  </div>
+</div>
 
               <div className="dash-card">
                 <h3>Innovation Score</h3>

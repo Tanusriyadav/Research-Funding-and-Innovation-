@@ -6,8 +6,9 @@ from app.crud.technology import get_technology_intelligence
 from app.crud.funding import get_recommended_funding
 
 
+
+
 def _score_research_novelty(publication_count: int) -> float:
-    # Each publication contributes up to 100 (capped)
     return min(publication_count * 15, 100)
 
 
@@ -17,10 +18,15 @@ def _score_patent_strength(patent_count: int) -> float:
 
 def _score_technology_maturity(db: Session) -> float:
     tech_data = get_technology_intelligence(db, top_n=20)
+
     if not tech_data:
         return 0
 
-    strong = sum(1 for t in tech_data if t["maturity"] in ("Mature", "Growing"))
+    strong = sum(
+        1 for t in tech_data
+        if t["maturity"] in ("Mature", "Growing")
+    )
+
     return round((strong / len(tech_data)) * 100, 1)
 
 
@@ -28,10 +34,17 @@ def _score_market_potential(funding_matches: int) -> float:
     return min(funding_matches * 25, 100)
 
 
-def _score_funding_relevance(funding_matches: int, total_funding: int) -> float:
+def _score_funding_relevance(
+    funding_matches: int,
+    total_funding: int
+) -> float:
     if total_funding == 0:
         return 0
-    return round((funding_matches / total_funding) * 100, 1)
+
+    return round(
+        (funding_matches / total_funding) * 100,
+        1
+    )
 
 
 def get_innovation_score(db: Session, profile):

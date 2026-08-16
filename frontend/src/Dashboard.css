@@ -170,6 +170,7 @@
   line-height: 1.5;
   margin-top: 8px;
 }
+
 /* ===== EMERGING TOPICS ===== */
 .topics-grid {
   display: flex;
@@ -217,6 +218,7 @@
   border-color: var(--amber);
   background: var(--amber-light);
 }
+
 /* ===== RESEARCH HOTSPOTS ===== */
 .hotspot-list {
   display: flex;
@@ -259,6 +261,7 @@
   color: var(--slate);
   text-align: right;
 }
+
 /* ===== TECHNOLOGY INTELLIGENCE ===== */
 .tech-grid {
   display: grid;
@@ -334,6 +337,7 @@
   font-size: 11px;
   color: var(--slate);
 }
+
 /* ===== INNOVATION SCORE ===== */
 .score-hero {
   display: flex;
@@ -368,6 +372,7 @@
   opacity: 0.7;
   margin-top: 2px;
 }
+
 .rating-badge {
   font-family: var(--font-mono);
   font-size: 12px;
@@ -432,6 +437,7 @@
   color: var(--slate);
   text-align: right;
 }
+
 /* ===== COMMERCIALIZATION RECOMMENDATIONS ===== */
 .commercial-list {
   display: flex;
@@ -492,6 +498,7 @@
   line-height: 1.6;
   margin: 0;
 }
+
 /* ===== SIDEBAR LAYOUT ===== */
 .dash-body {
   display: flex;
@@ -539,6 +546,7 @@
   padding: 40px;
   overflow-y: auto;
 }
+
 /* ===== EDIT PROFILE ===== */
 .edit-profile-btn {
   margin-top: 12px;
@@ -610,6 +618,7 @@
   font-family: var(--font-body);
   font-size: 13px;
 }
+
 /* ===== PUBLICATION SEARCH ===== */
 .search-form {
   display: flex;
@@ -703,4 +712,110 @@
 .search-add-btn:hover {
   background: var(--signal-teal);
   color: #fff;
+}
+
+/* ===== OVERVIEW STATS ===== */
+.overview-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.overview-stat-card {
+  background: var(--paper-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.overview-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--signal-teal);
+  box-shadow: var(--shadow-md);
+}
+
+.overview-stat-card h4 {
+  margin: 0 0 10px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--slate);
+}
+
+.overview-stat-card strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ink-navy);
+  margin-bottom: 6px;
+}
+
+.overview-stat-card p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--slate);
+}
+
+/* ===== RESPONSIVE OVERVIEW ===== */
+@media (max-width: 900px) {
+  .overview-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .overview-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .overview-stat-card {
+    padding: 16px;
+  }
+}
+
+/* ===== INTELLIGENCE SUMMARY ===== */
+.intelligence-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.intelligence-item {
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f9fafb;
+}
+
+.intelligence-item span {
+  display: block;
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.intelligence-item strong {
+  font-size: 16px;
+  color: #1f2937;
+}
+
+@media (max-width: 900px) {
+  .intelligence-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .intelligence-summary {
+    grid-template-columns: 1fr;
+  }
 }

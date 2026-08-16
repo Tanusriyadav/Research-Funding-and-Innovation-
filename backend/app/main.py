@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.db.database import engine, Base
-from app.models import user
+from app.models import user, funding
 from app.api.auth import routes as auth_routes
 from app.api.profile import routes as profile_routes
 from app.api.funding import routes as funding_routes
@@ -14,7 +14,10 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+     allow_origins=[
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
